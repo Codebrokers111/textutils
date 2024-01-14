@@ -3,13 +3,13 @@ import React, {useState} from 'react'
 import './App.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About'
+import About from './components/About'
 import Alert from './components/Alert'
-// import{
-//   BrowserRouter as Router,
-//   Route,
-//   Routes
-// } from "react-router-dom";
+import{
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState('light');
@@ -24,7 +24,15 @@ function App() {
       setAlert(null)
     },1500)
   }
-  const toggleMode = () => {
+  // const removeBodyClasses = () => {
+  //   document.body.classList.remove('bg-primary')
+  //   document.body.classList.remove('bg-success')
+  //   document.body.classList.remove('bg-danger')
+  //   document.body.classList.remove('bg-warning')
+  // }
+  const toggleMode = (cls) => {
+    // removeBodyClasses()
+    // document.body.classList.add('bg-'+cls)
     if(mode === 'light'){
       setMode('dark')
       document.body.style.backgroundColor = '#042743'
@@ -38,19 +46,20 @@ function App() {
   }
   return (
     <>
-    {/* <Router></Router> */}
+    <Router>
     <Navbar title="Textutils" mode={mode} toggleMode={toggleMode}/>
     <Alert alert={alert}/>
     <div className="container my-3">
-    <TextForm heading="Enter your Text Below to Analyze" showAlert={showAlert} mode={mode}/>
-      {/* <Routes>
-        <Route exact path="/" element={<TextForm heading="Enter your Text Below to Analyze" showAlert={showAlert} mode={mode}/>
+      <Routes>
+        <Route exact path="/" element={
+        <TextForm heading="TextUtils - The game with the text" showAlert={showAlert} mode={mode}/>
         }>
         </Route>
-        <Route exact path="/about" element={<About/>}>
+        <Route path="/about" element={<About mode={mode}/>}>
         </Route>
-      </Routes> */}
+      </Routes>
     </div>
+    </Router>
     </> 
   );
 }
